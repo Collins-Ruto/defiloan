@@ -15,7 +15,11 @@ import {
 import { getLenders } from "../../utils/lenderManager";
 import AddLoan from "../loanManager/AddLoan";
 import AddCollateral from "../loanManager/AddCollateral";
-import { createLoan, rePaymentRequest } from "../../utils/loanManager";
+import {
+  addSavings,
+  createLoan,
+  rePaymentRequest,
+} from "../../utils/loanManager";
 import RepayLoan from "./RepayLoan";
 import AddSavings from "./Save";
 import Loader from "../utils/Loader";
@@ -123,11 +127,12 @@ export default function BorrowerPage({ borrower }) {
     }
   };
 
-  const addSavings = async (savings) => {
+  const createSavings = async (lenderId, amount) => {
     try {
       setLoading(true);
-      savings.amount = parseInt(savings.amount, 10) * 10 ** 8;
-      createLoan(savings).then((resp) => {
+      const intAmount = parseInt(amount, 10) * 10 ** 8;
+      console.log(intAmount)
+      addSavings(lenderId, intAmount).then((resp) => {
         getPendingLoans();
       });
       toast(<NotificationSuccess text="Savings added successfully." />);
@@ -220,7 +225,7 @@ export default function BorrowerPage({ borrower }) {
               Available loans
             </Heading>
             <div className="flex w-full justify-content-end">
-              <AddSavings save={addSavings} lenders={lenders} />
+              <AddSavings save={createSavings} lenders={lenders} />
               <AddCollateral save={newCollateral} />
             </div>
             <div className="mt-2.5 flex items-start justify-between gap-5 self-stretch md:flex-col">

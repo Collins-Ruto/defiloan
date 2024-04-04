@@ -121,7 +121,10 @@ export async function rePaymentRequest(loanId, amount) {
 // add savings
 export async function addSavings(lenderId, amount) {
   const loanManagerCanister = window.canister.loanManager;
-  const orderResponse = await loanManagerCanister.createSavings(lenderId, amount);
+  const orderResponse = await loanManagerCanister.createSavings(
+    lenderId,
+    amount
+  );
 
   console.log(orderResponse);
   const lenderPrincipal = Principal.from(orderResponse.Ok.lender);
@@ -133,7 +136,7 @@ export async function addSavings(lenderId, amount) {
     orderResponse.Ok.price,
     orderResponse.Ok.memo
   );
-  await loanManagerCanister.completeSavings(
+  await loanManagerCanister.completeSaving(
     lenderPrincipal,
     lenderId,
     orderResponse.Ok.price,

@@ -791,11 +791,13 @@ export default Canister({
 
   createSavings: update(
     [text, nat64],
-    Result(Borrower, ErrorType),
+    Result(ReserveSavings, ErrorType),
     (lenderId, amount) => {
       const borrowerOpt = borrowersStorage.values().filter((borrower) => {
         return borrower.principal.toText() === ic.caller().toText();
       });
+
+      console.log(amount);
 
       const lenderOpt = lendersStorage.get(lenderId);
       if ("None" in lenderOpt) {
@@ -822,14 +824,14 @@ export default Canister({
 
       pendingSavings.insert(reserveSavings.memo, reserveSavings);
       discardByTimeout(reserveSavings.memo, PAYMENT_RESERVATION_PERIOD);
-      return Ok(borrower);
+      return Ok(reserveSavings);
     }
   ),
 
   completeSaving: update(
-    [Principal, nat64, nat64, nat64],
+    [Principal, text, nat64, nat64, nat64],
     Result(ReserveSavings, ErrorType),
-    async (reservor, reservePrice, block, memo) => {
+    async (reservor, lenderId, reservePrice, block, memo) => {
       const paymentVerified = await verifyPaymentInternal(
         reservor,
         reservePrice,
