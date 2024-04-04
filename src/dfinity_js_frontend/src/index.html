@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" loan="width=device-width">
+    <title>IC loanManager app</title>
+    <base href="/">
+    <link type="text/css" rel="stylesheet" href="main.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+    screens: { md: { max: "1050px" }, sm: { max: "550px" } },
+    extend: {
+      colors: {
+        white: { A700_01: "#ffffff", A700: "#fefeff" },
+        gray: {
+          50: "#f8f9fa",
+          100: "#f3f4f6",
+          200: "#f0f0f0",
+          300: "#dee1e6",
+          500: "#9095a0",
+          700: "#565e6c",
+          900: "#1d2128",
+          "900_01": "#171a1f",
+          "900_02": "#272727",
+          "900_03": "#292929",
+          "300_77": "#dee1e677",
+          "300_96": "#dee1e696",
+          "300_e5": "#dee1e6e5",
+          "50_01": "#fdf1fd",
+        },
+        black: { 900: "#000000" },
+        purple: { 50: "#fce6fb", A200_c1: "#e845e2c1", A200: "#e845e2", A200_60: "#e845e260", A200_54: "#e845e254" },
+        blue_gray: { 200: "#bcc1ca", 800: "#424955", 900: "#373737", "900_01": "#323842" },
+        pink: { 300: "#e75cb9", "300_66": "#e75cb966", "300_56": "#e75cb956" },
+        teal: { 900: "#003138" },
+        cyan: { 100: "#a6f5ff" },
+        red: { 50: "#fdf2f2", 600: "#de3b40" },
+      },
+      boxShadow: { xs: "0px 3px 6px 0px #120f281e", sm: "0px 0px 1px 0px #171a1f11", md: "0px 4px 9px 0px #171a1f1c" },
+      fontFamily: { inter: "Inter", epilogue: "Epilogue" },
+    },
+  },}
+</script>
+ </head>
+ <body>
+    <div id="root"></div>
+ </body>
+</html>
